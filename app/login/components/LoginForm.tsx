@@ -26,27 +26,27 @@ export default function LoginForm() {
   const router = useRouter();
   
   const handleLogin = async (values: handleLoginProps) => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/user/webLogin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      });
+    // try {
+    //   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/user/webLogin`, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       email: values.email,
+    //       password: values.password,
+    //     }),
+    //   });
 
-      const responseData = await res.json();
-      if (!res.ok) {
-        toast.error(responseData.message || "Login failed");
-        return;
-      }
+    //   const responseData = await res.json();
+    //   if (!res.ok) {
+    //     toast.error(responseData.message || "Login failed");
+    //     return;
+    //   }
 
-      await setSessionToken(responseData?.session_token);
-      router.replace("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+    //   await setSessionToken(responseData?.session_token);
+    //   router.replace("/dashboard");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
