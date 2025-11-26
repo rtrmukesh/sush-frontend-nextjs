@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import Header from "@/components/components/layout/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,12 +19,7 @@ export const metadata: Metadata = {
   title: "Sush Tech",
   description:
     "Access the Sush Tech to manage projects, track tasks, view reports, and collaborate with your team efficiently.",
-  keywords: [
-    "SushTech",
-    "Sush Tech",
-    "sush tech",
-    "sush tech portal",
-  ],
+  keywords: ["SushTech", "Sush Tech", "sush tech", "sush tech portal"],
   authors: [{ name: "Mukesh" }],
   // icons: {
   //   icon: "/nexreon-fav.png",
@@ -39,7 +36,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
         <Toaster richColors closeButton position="top-right" />
       </body>
     </html>

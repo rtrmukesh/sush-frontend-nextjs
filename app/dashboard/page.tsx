@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"; // For Next.js 13+ App Router
 import { getSessionToken } from "../actions/cookie-actions";
+import BlurLoader from "@/components/BlurLoader";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -14,15 +15,15 @@ export default function DashboardPage() {
       if (!token) {
         router.replace("/login");
       } else {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     checkToken();
   }, [router]);
 
-  if (loading) {
-    return <p>Loading...</p>;
+    if(isLoading){
+    return <BlurLoader isLoading={true}/>
   }
 
   return <h1>Dashboard Loaded Successfully</h1>;
