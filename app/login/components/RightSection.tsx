@@ -6,13 +6,17 @@ import { auth } from "@/firebase/firebaseConfig";
 import Userservice from "@/app/api/user/user.service";
 import { setSessionToken } from "@/app/actions/cookie-actions";
 import { useRouter } from "next/navigation";
+import BlurLoader from "@/components/BlurLoader";
+import { useState } from "react";
 
 function RightSection() {
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
 
   const handleGoogle = async () => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
+    setIsLoading(true)
 
     const createData = {
       name: result?.user?.displayName,
@@ -26,7 +30,12 @@ function RightSection() {
     await setSessionToken(response?.token);
 
     router.replace("/dashboard");
+    setIsLoading(false)
   };
+
+  if(isLoading){
+    return <BlurLoader isLoading={true}/>
+  }
 
   return (
     <div className="flex flex-col justify-center p-10 md:p-20 items-center">
