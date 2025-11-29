@@ -151,7 +151,7 @@ export async function PUT(req: NextRequest) {
       data: {
         targetText,
         replyText,
-        alwaysReply,
+        alwaysReply: alwaysReply ?? false,
       },
     });
 
