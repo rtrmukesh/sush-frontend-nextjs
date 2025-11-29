@@ -99,6 +99,7 @@ if (text == value.targetText) {
       //   }
       // );
     }
+    }
 
     return NextResponse.json({
       success: true,
