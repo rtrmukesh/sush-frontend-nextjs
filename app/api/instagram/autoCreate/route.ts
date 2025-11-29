@@ -131,6 +131,13 @@ export async function PUT(req: NextRequest) {
 
     const body = await req.json();
     const { mediaId, targetText, replyText, alwaysReply } = body;
+if (alwaysReply === undefined || alwaysReply === null || typeof alwaysReply !== "boolean" || isNaN(alwaysReply)){
+      return NextResponse.json({
+        success: false,
+        error: "Invalid alwaysReply value",
+      });
+}
+
     if (!mediaId || !targetText || !replyText) {
       return NextResponse.json({
         success: false,
@@ -151,7 +158,7 @@ export async function PUT(req: NextRequest) {
       data: {
         targetText,
         replyText,
-        alwaysReply,
+        alwaysReply: alwaysReply ?? false,
       },
     });
 
