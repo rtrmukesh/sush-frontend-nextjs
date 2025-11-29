@@ -55,8 +55,27 @@ export async function POST(request: NextRequest) {
     for (let i = 0; i < getAutoReplayList.length; i++) {
       const value = getAutoReplayList[i];
 
-      if (value.targetText !== "All") {
-        if (text == value.targetText) {
+      if (value.targetText =="All") {
+          
+                  await fetch(`https://graph.facebook.com/v21.0/${commentId}/replies`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: value?.replyText,
+            access_token: pageToken,
+          }),
+        });
+      }
+          
+          
+          
+        
+        
+      } else {
+          
+          
+
+if (text == value.targetText) {
           await fetch(`https://graph.facebook.com/v21.0/${commentId}/replies`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -66,17 +85,6 @@ export async function POST(request: NextRequest) {
             }),
           });
         }
-      } else {
-        await fetch(`https://graph.facebook.com/v21.0/${commentId}/replies`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: value?.replyText,
-            access_token: pageToken,
-          }),
-        });
-      }
-
 
       // await fetch(
       //   `https://graph.facebook.com/v21.0/${businessAccountId}/messages`,
