@@ -130,7 +130,7 @@ export async function PUT(req: NextRequest) {
     const userDetail = verifyToken(token);
 
     const body = await req.json();
-    const { mediaId, targetText, replyText } = body;
+    const { mediaId, targetText, replyText, alwaysReply } = body;
     if (!mediaId || !targetText || !replyText) {
       return NextResponse.json({
         success: false,
@@ -151,7 +151,7 @@ export async function PUT(req: NextRequest) {
       data: {
         targetText,
         replyText,
-        alwaysReply: body?.alwaysReply ?? false,
+        alwaysReply,
       },
     });
 
