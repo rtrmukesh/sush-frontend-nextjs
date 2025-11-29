@@ -1,113 +1,91 @@
 "use client";
-import { getSessionToken } from "@/app/actions/cookie-actions";
-import BlurLoader from "@/components/BlurLoader";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
-type MediaItem = {
-  id: string;
-  caption?: string;
-  media_type: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
-  media_url: string;
-  permalink: string;
-  thumbnail_url?: string;
-};
+import { getSessionToken } from "@/app/actions/cookie-actions";
+import AddButton from "@/components/AddButton";
+import BlurLoader from "@/components/BlurLoader";
+import Container from "@/components/Container";
+import Drawer from "@/components/Modal";
+import { useEffect, useState } from "react";
+import InstagramModelBody from "./InstagramModelBody";
+import InstagramAutoReplyList from "./InstagramAutoReplyList";
 
 export default function InstagramFeed() {
-  const [media, setMedia] = useState<MediaItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"posts" | "reels">("reels");
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  const [autoCreateList, setAutoCreateList] = useState([]);
+
+  const getAutoReplies = async () => {
+    const token = await getSessionToken();
+    if (!token?.token) return;
+    const res = await fetch("/api/instagram/autoCreate", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.token}`,
+      },
+    });
+
+    const result = await res.json();
+    setAutoCreateList(result?.data || []);
+  };
 
   useEffect(() => {
-    const fetchMedia = async () => {
-      try {
-        const token = await getSessionToken();
-        if (!token?.token) return router.replace("/login");
-
-        setLoading(true);
-        const res = await fetch("/api/instagram/feed", {
-          headers: { Authorization: `Bearer ${token.token}` },
-        });
-        const data = await res.json();
-        if (data?.success && data?.data) setMedia(data.data);
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching Instagram media:", err);
-      }
-    };
-
-    fetchMedia();
+    getAutoReplies();
   }, []);
 
-  if (loading){
+  const handleCreateAutoReply = async (data: {
+    mediaId: string;
+    targetText: string;
+    replyText: string;
+    media_url: string;
+    media_type: string;
+  }) => {
+    try {
+      const token = await getSessionToken();
+      if (!token?.token) return;
+      setLoading(true);
+      const res = await fetch("/api/instagram/autoCreate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        await getAutoReplies();
+        setIsModelOpen(false);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        console.error("Failed to create auto reply:", result);
+      }
+    } catch (err) {
+      setLoading(false);
+      console.error("Error creating auto reply:", err);
+    }
+  };
+
+  if (loading) {
     return <BlurLoader isLoading={true} color="white" name="HashLoader" />;
   }
 
-  const posts = media.filter((item) => item.media_type === "IMAGE");
-  const reels = media.filter((item) => item.media_type === "VIDEO");
-
-  const mainPreview = activeTab === "reels" ? reels : posts;
   return (
-    <div>
-      {/* Tabs */}
-      <div style={{ display: "flex", marginBottom: 16 }}>
-        <button
-          onClick={() => setActiveTab("posts")}
-          style={{
-            flex: 1,
-            padding: 8,
-            backgroundColor: activeTab === "posts" ? "#3897f0" : "#eee",
-            color: activeTab === "posts" ? "#fff" : "#000",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Posts
-        </button>
-        <button
-          onClick={() => setActiveTab("reels")}
-          style={{
-            flex: 1,
-            padding: 8,
-            backgroundColor: activeTab === "reels" ? "#3897f0" : "#eee",
-            color: activeTab === "reels" ? "#fff" : "#000",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Reels
-        </button>
+    <Container>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <AddButton
+          label="Add Auto Reply"
+          onClick={() => setIsModelOpen(true)}
+          variant="primary"
+        />
       </div>
 
-      {/* Content */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: 16,
-        }}
-      >
-        {mainPreview.map((item) => (
-          <a
-            key={item.id}
-            href={item.permalink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {item.media_type === "VIDEO" ? (
-              <video src={item.media_url} controls width="100%" />
-            ) : (
-              <img
-                src={item.media_url}
-                alt={item.caption || "Instagram post"}
-                width="100%"
-              />
-            )}
-            {item.caption && <p>{item.caption}</p>}
-          </a>
-        ))}
-      </div>
-    </div>
+      <Drawer isOpen={isModelOpen} onClose={() => setIsModelOpen(false)}>
+        <InstagramModelBody handleSend={handleCreateAutoReply} />
+      </Drawer>
+      <InstagramAutoReplyList mediaList={autoCreateList} />
+    </Container>
   );
 }

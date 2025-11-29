@@ -27,10 +27,9 @@ model User {
 
 model Integration {
   id            String   @id @default(cuid())
-
   user_id        String
+  autoReplies AutoReply[]
   user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
   access_token  String
   refresh_token String?
   object_id     String?
@@ -44,4 +43,20 @@ model Integration {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   deletedAt     DateTime?
+
+}
+
+
+
+model AutoReply {
+  id          String   @id @default(cuid())
+  integrationId String?
+  integration   Integration? @relation(fields: [integrationId], references: [id])
+  mediaId     String   // Instagram media ID
+  targetText  String   // The text that triggers this auto-reply
+  replyText   String   // The text to reply automatically
+  media_url   String   // The URL of the media
+  media_type  String   // The type of the media (e.g., IMAGE, VIDEO)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

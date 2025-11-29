@@ -51,20 +51,13 @@ export default function InstagramConnect() {
   }, []);
 
   const handleConnect = () => {
-    // const url = `https://www.instagram.com/oauth/authorize?force_reauth=true&client_id=713048034752152&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/api/instagram/callback&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish%2Cinstagram_business_manage_insights&state=${encodedToken}`;
-
-   const url = `https://www.instagram.com/oauth/authorize?force_reauth=true&client_id=713048034752152&redirect_uri=https://opponents-quantity-outlet-roulette.trycloudflare.com/api/instagram/callback&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish%2Cinstagram_business_manage_insights`;
-
-
-
-
+    const url = `${process.env.NEXT_PUBLIC_WEB_HOOK_URL}&state=${encodedToken}`;
     window.location.href = url;
   };
 
-   if (loading){
+  if (loading) {
     return <BlurLoader isLoading={true} color="white" name="HashLoader" />;
   }
-
 
   return isConnected ? (
     <InstagramFeed />

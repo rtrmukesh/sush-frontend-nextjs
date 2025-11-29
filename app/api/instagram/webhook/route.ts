@@ -1,8 +1,9 @@
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 const VERIFY_TOKEN = "Sushsuga@5106";
+const pageToken = process.env.INSTAGRAM_PAGE_ACCESS_TOKEN!;
 
-// 🔹 Webhook Verification (GET)
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
@@ -18,9 +19,73 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// 🔹 Webhook Events Receiver (POST)
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  console.log("Webhook event received:", JSON.stringify(body, null, 2));
-  return NextResponse.json({ status: "EVENT_RECEIVED" }, { status: 200 });
+  try {
+    const body = await request.json();
+
+    const entry = body.entry?.[0];
+    const change = entry?.changes?.[0];
+    const value = change?.value;
+
+    if (!value || change?.field !== "comments") {
+      return NextResponse.json({ success: true });
+    }
+
+    const businessAccountId = entry.id;
+    const commentId = value.id;
+    const userId = value.from?.id;
+    const username = value.from?.username;
+    const text = value.text;
+
+    const getAutoReplayList = await prisma.autoReply.findMany({
+      where: {
+        mediaId: value?.value?.media?.id,
+        targetText: text,
+      },
+      include: {
+        integration: true,
+      },
+    });
+
+    if (getAutoReplayList.length === 0) {
+      return NextResponse.json({ success: true });
+    }
+
+    for (let i = 0; i < getAutoReplayList.length; i++) {
+      const value = getAutoReplayList[i];
+
+      await fetch(`https://graph.facebook.com/v21.0/${commentId}/replies`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: value?.replyText,
+          access_token: pageToken,
+        }),
+      });
+
+      // await fetch(
+      //   `https://graph.facebook.com/v21.0/${businessAccountId}/messages`,
+      //   {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify({
+      //       recipient: { id: userId },
+      //       message: { text: `❤️ Hi @${username}! Thanks for commenting!` },
+      //       access_token: value?.integration?.access_token,
+      //     }),
+      //   }
+      // );
+    }
+
+    return NextResponse.json({
+      success: true,
+      action: "Reply + DM sent",
+    });
+  } catch (err: any) {
+    console.error("Webhook Error:", err?.message);
+    return NextResponse.json(
+      { success: false, error: err?.message },
+      { status: 500 }
+    );
+  }
 }

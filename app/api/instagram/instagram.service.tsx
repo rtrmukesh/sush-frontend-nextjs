@@ -1,17 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-
-
-
 const igClientId = process.env.INSTAGRAM_CLIENT_ID!;
 const igClientSecret = process.env.INSTAGRAM_CLIENT_SECRET!;
 const igRedirectUri = process.env.INSTAGRAM_REDIRECT_URI!;
 
 class InstagramService {
-
   static async getShortToken(code: string) {
-
     const tokenResponse = await fetch(
       `https://api.instagram.com/oauth/access_token`,
       {
@@ -43,15 +38,15 @@ class InstagramService {
 
   static async callback(code: string, userParam: any) {
     try {
-
-      const shortTokenRes = await InstagramService.getShortToken(code)
+      const shortTokenRes = await InstagramService.getShortToken(code);
 
       if (!shortTokenRes.access_token) {
         return NextResponse.json(shortTokenRes, { status: 400 });
       }
 
-      const longTokenResponse = await InstagramService.getLongAccessToken(shortTokenRes.access_token)
-
+      const longTokenResponse = await InstagramService.getLongAccessToken(
+        shortTokenRes.access_token
+      );
 
       const responses = await fetch(
         `https://graph.instagram.com/me?fields=id,username,account_type,media_count&access_token=${longTokenResponse?.access_token}`
@@ -68,14 +63,23 @@ class InstagramService {
           object_id: userParam?.user_id,
           insta_business_id: instagramResponse?.id,
           insta_user_name: instagramResponse?.username,
-          insta_account_type: instagramResponse?.account_type
+          insta_account_type: instagramResponse?.account_type,
         },
       });
 
-      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/instagram`);
+      return NextResponse.redirect(
+        `${process.env.NEXT_PUBLIC_APP_URL}/instagram`
+      );
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static async getMedia(insta_business_id: string, access_token: string) {
+    const media = await fetch(
+      `https://graph.instagram.com/${insta_business_id}/media?fields=id,media_type,media_url,thumbnail_url,timestamp,caption&access_token=${access_token}`
+    ).then((r) => r.json());
+    return media;
   }
 }
 export default InstagramService;
