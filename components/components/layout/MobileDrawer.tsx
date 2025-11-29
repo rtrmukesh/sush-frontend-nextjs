@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { MENUS } from "./NavMenuData";
 import { motion } from "framer-motion";
 
@@ -8,7 +9,13 @@ type MobileDrawerProps = {
 };
 
 export default function MobileDrawer({ open, setOpen }: MobileDrawerProps) {
+  const router = useRouter();
   if (!open) return null;
+
+  const handleNavigate = (route: string) => {
+    router.push(route);
+    setOpen(false);
+  };
 
   return (
     <div
@@ -33,6 +40,7 @@ export default function MobileDrawer({ open, setOpen }: MobileDrawerProps) {
               <p
                 key={item?.name}
                 className="py-2 text-lg text-gray-900 dark:text-gray-200 font-medium"
+                onClick={() => handleNavigate(item?.route)}
               >
                 {item?.name}
               </p>
