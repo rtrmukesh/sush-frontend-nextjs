@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, message: "Auto reply saved!" });
   } catch (err) {
     console.error("API Error:", err);
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ success: false, error: (err as Error).message });
   }
 }
 
