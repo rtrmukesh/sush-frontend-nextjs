@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Header from "@/components/components/layout/Header";
+import PagePreloader from "@/components/PagePreloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +37,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          <Header />
-          {children}
-        </ThemeProvider>
+        <PagePreloader>
+          <ThemeProvider>
+            {/* <Header /> */}
+            {children}
+          </ThemeProvider>
+        </PagePreloader>
         <Toaster richColors closeButton position="top-right" />
       </body>
     </html>
