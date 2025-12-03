@@ -29,3 +29,46 @@ body {
 * {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.preloader-container {
+  position: fixed;
+  inset: 0;
+  background: #020d1f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* Responsive SVG */
+.loader-svg {
+  width: 35vw;   /* Desktop scale */
+  max-width: 140px;
+  min-width: 80px;
+}
+
+@media (max-width: 768px) {
+  .loader-svg {
+    width: 28vw; /* Tablet */
+    max-width: 120px;
+    min-width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-svg {
+    width: 30vw; /* Mobile */
+    max-width: 100px;
+    min-width: 60px;
+  }
+}
+

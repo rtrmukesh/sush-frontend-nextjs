@@ -1,0 +1,32 @@
+import { AiOutlineStar } from "react-icons/ai";
+
+export default function HighlightsSection() {
+  return (
+    <section
+      id="stats"
+      className="bg-[#1e1e1f] p-6  border border-[#1e1f21] shadow-lg"
+    >
+      <div className="flex items-center gap-2">
+        <AiOutlineStar className="text-xl" />
+        <h3 className="text-xl font-semibold">Highlights & Successes</h3>
+      </div>
+
+      <div className="mt-5 grid grid-cols-3 gap-6 sm:grid-cols-3 text-center">
+        <div>
+          <p className="text-3xl font-bold">+4</p>
+          <span className="text-xs text-gray-400 block">YEARS OF EXPERIENCE</span>
+        </div>
+
+        <div>
+          <p className="text-3xl font-bold">+0</p>
+          <span className="text-xs text-gray-400 block">PROJECTS COMPLETED</span>
+        </div>
+
+        <div>
+          <p className="text-3xl font-bold">+0</p>
+          <span className="text-xs text-gray-400 block">CERTIFICATIONS</span>
+        </div>
+      </div>
+    </section>
+  );
+}
