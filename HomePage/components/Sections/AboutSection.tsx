@@ -8,15 +8,15 @@ export default function AboutSection() {
       <div className="w-20 h-[3px] bg-blue-400 mt-2 rounded-full" />
 
       <p className="text-gray-300 mt-4 leading-relaxed">
-        I'm Mukesh, a Software Engineer based in Bangalore, India.
-        Passionate about programming, web development, and building scalable
-        solutions to solve real-world problems.
+        I'm Mukesh, a Software Engineer based in Bangalore, India — passionate
+        about building scalable Web and Mobile applications (iOS & Android)
+        using modern technologies to solve real-world problems.
       </p>
 
       <p className="text-gray-300 mt-4 leading-relaxed">
-        I hold a postgraduate degree from the National Institute of Technology,
-        Tiruchirappalli, and have worked as a Software Development Engineer since
-        2018.
+        I hold a postgraduate degree from the Dharmapuram Adhinam Arts and
+        Science College, Mayiladuthurai, and have worked as a Software
+        Development Engineer since 2022.
       </p>
     </section>
   );
