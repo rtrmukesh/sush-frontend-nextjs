@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sush Tech",
+  title: "Mukesh M",
   description:
     "Access the Sush Tech to manage projects, track tasks, view reports, and collaborate with your team efficiently.",
   keywords: ["SushTech", "Sush Tech", "sush tech", "sush tech portal"],

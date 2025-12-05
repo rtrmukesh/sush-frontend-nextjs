@@ -22,9 +22,13 @@ export default function HighlightsSection() {
           <span className="text-xs text-gray-400 block">PROJECTS COMPLETED</span>
         </div>
 
-        <div>
+        {/* <div>
           <p className="text-3xl font-bold">+0</p>
           <span className="text-xs text-gray-400 block">CERTIFICATIONS</span>
+        </div> */}
+         <div>
+          <p className="text-3xl font-bold">+5</p>
+          <span className="text-xs text-gray-400 block">PROJECTS INPROGRESS</span>
         </div>
       </div>
     </section>
