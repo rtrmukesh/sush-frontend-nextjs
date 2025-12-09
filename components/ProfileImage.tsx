@@ -15,8 +15,8 @@ const ProfileImage = ({ show }: { show: boolean }) => {
         >
           <motion.div
             className="w-full h-full"
-            initial={{ scale: 1.5 }} 
-            whileHover={{ scale: 1.8 }} 
+            initial={{ scale: 1.5 }}
+            whileHover={{ scale: 1.1 }} 
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >
             <Image
@@ -25,6 +25,8 @@ const ProfileImage = ({ show }: { show: boolean }) => {
               width={200}
               height={200}
               className="object-cover w-full h-full"
+              loading="lazy"
+              priority={false}
             />
           </motion.div>
         </motion.div>
