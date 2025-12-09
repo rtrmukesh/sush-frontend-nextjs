@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import Header from "@/components/components/layout/Header";
 import PagePreloader from "@/components/PagePreloader";
 
 const geistSans = Geist({
@@ -17,32 +16,79 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mukesh M",
+  title: "Mukesh M — Full Stack Developer",
   description:
-    "Access the Sush Tech to manage projects, track tasks, view reports, and collaborate with your team efficiently.",
-  keywords: ["SushTech", "Sush Tech", "sush tech", "sush tech portal"],
-  authors: [{ name: "Mukesh" }],
-  // icons: {
-  //   icon: "/nexreon-fav.png",
-  // },
+    "Portfolio of Mukesh M — Web, Android, iOS, and Desktop apps developer.",
+  keywords: [
+    "Full Stack Developer",
+    "Web Developer",
+    "Android Developer",
+    "iOS Developer",
+    "Desktop Apps",
+    "Portfolio",
+    "sush tech",
+    "themukesh.com",
+    "themukesh",
+    "mukeshm",
+    "SushTech",
+    "Sush Tech",
+    "sush tech",
+    "sush tech portal",
+  ],
+  appleWebApp: {
+    title: "Mukesh M",
+    capable: true,
+    statusBarStyle: "black-translucent",
+  },
+  openGraph: {
+    title: "Mukesh M — Full Stack Developer Portfolio",
+    description: "Web, Android, iOS, and Desktop apps developer portfolio.",
+    url: "https://www.themukesh.com",
+    siteName: "Mukesh M",
+    images: [
+      {
+        url: "https://www.themukesh.com/mukesh-mg.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mukesh M — Full Stack Developer",
+    description:
+      "Official portfolio of Mukesh M — I build Web, Android, iOS & Desktop applications with modern tech stacks.",
+    site: "@themukesh",
+    creator: "@themukesh",
+    images: [
+      {
+        url: "https://www.themukesh.com/mukesh-mg.png",
+        alt: "Mukesh M — Full Stack Developer Portfolio",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon?<generated>" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-icon?<generated>" type="image/png" sizes="192x192" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <PagePreloader>
-          <ThemeProvider>
-            {/* <Header /> */}
-            {children}
-          </ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </PagePreloader>
+
         <Toaster richColors closeButton position="top-right" />
       </body>
     </html>
