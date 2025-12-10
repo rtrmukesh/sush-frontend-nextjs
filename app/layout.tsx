@@ -94,6 +94,7 @@ export default function RootLayout({
           type="image/png"
           sizes="192x192"
         />
+        <meta name="google-site-verification" content="AUY8DrfbJpplzyCMcTJNiCHYZJ34AB2NphOmTJ1_gfY" />
       </head>
 
       <body
