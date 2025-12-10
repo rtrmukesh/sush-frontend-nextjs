@@ -104,7 +104,7 @@ const ResumeSection = () => {
               <div className="flex-1">
                 <h4 className="text-white font-semibold">{item.title}</h4>
                 <p className="text-gray-400">{item.company}</p>
-                <span className="text-blue-400 text-sm">{item.period}</span>
+                <span className="text-sm text-[#52b3c7]">{item.period}</span>
                 <p className="text-gray-400 mt-2 leading-relaxed">
                   {item.description}
                 </p>
