@@ -3,6 +3,7 @@ import ProfileCard from "@/HomePage/components/ProfileCard/ProfileCard";
 import AboutSection from "@/HomePage/components/Sections/about/AboutSection";
 import HighlightsSection from "@/HomePage/components/Sections/about/HighlightsSection";
 import PortfolioSection from "@/HomePage/components/Sections/about/PortfolioSection";
+import ContactSection from "@/HomePage/components/Sections/contact";
 import NavigationTab from "@/HomePage/components/Sections/NavigationTab";
 import ResumeSection from "@/HomePage/components/Sections/resume";
 import {
@@ -100,6 +101,8 @@ export default function Home() {
               )}
 
               {tabIndex == 1 && <ResumeSection />}
+              {tabIndex == 3 && <ContactSection />}
+
             </div>
           </div>
 
@@ -116,6 +119,7 @@ export default function Home() {
                 </>
               )}
               {tabIndex == 1 && <ResumeSection />}
+              {tabIndex == 3 && <ContactSection />}
             </div>
           </div>
         </div>

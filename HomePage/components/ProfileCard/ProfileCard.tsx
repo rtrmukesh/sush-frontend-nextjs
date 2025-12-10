@@ -18,6 +18,21 @@ export default function ProfileCard({
 }) {
   const [showContacts, setShowContacts] = useState(false);
 
+  const profileData = {
+    email: "contact@themukesh.com",
+    linkedin: "https://www.linkedin.com/in/mukesh-m-6b9404242/",
+    instagram: "https://www.instagram.com/rtr_mukesh_/",
+    facebook: "https://www.facebook.com/share/17Z3SPtSSt/?mibextid=wwXIfr",
+    github: "https://github.com/rtrmukesh",
+  };
+
+  const onSocialClick = (clickedSocial: keyof typeof profileData) => {
+    const link = profileData[clickedSocial];
+
+    if (!link) return;
+    window.open(link, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="relative w-full">
       {/* MAIN CARD */}
@@ -139,7 +154,12 @@ export default function ProfileCard({
                 <div>
                   <p className="text-[10px] text-gray-500">EMAIL</p>
                   <p className="text-xs font-medium break-all">
-                    contact@themukesh.com
+                    <a
+                      href={`mailto:${profileData?.email}?subject=Hello%20Mukesh&body=I%20visited%20your%20portfolio`}
+                      className="text-xs font-medium break-all cursor-pointer"
+                    >
+                      {profileData?.email}
+                    </a>
                   </p>
                 </div>
               </div>
@@ -160,10 +180,22 @@ export default function ProfileCard({
               <div className="w-full h-[1px] bg-gray-700 rounded-full p-0"></div>
               {/* SOCIAL */}
               <div className="flex justify-start gap-4  text-xl">
-                <FaLinkedin className="hover:text-blue-500 duration-200 cursor-pointer" />
-                <FaInstagram className="hover:text-pink-500 duration-200 cursor-pointer" />
-                <FaFacebookF className="hover:text-blue-400 duration-200 cursor-pointer" />
-                <FaGithub className="hover:text-gray-400 duration-200 cursor-pointer" />
+                <FaLinkedin
+                  className="hover:text-blue-500 duration-200 cursor-pointer"
+                  onClick={() => onSocialClick?.("linkedin")}
+                />
+                <FaInstagram
+                  className="hover:text-pink-500 duration-200 cursor-pointer"
+                  onClick={() => onSocialClick?.("instagram")}
+                />
+                <FaFacebookF
+                  className="hover:text-blue-400 duration-200 cursor-pointer"
+                  onClick={() => onSocialClick?.("facebook")}
+                />
+                <FaGithub
+                  className="hover:text-gray-400 duration-200 cursor-pointer"
+                  onClick={() => onSocialClick?.("github")}
+                />
               </div>
             </div>
           </motion.div>
