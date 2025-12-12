@@ -1,9 +1,10 @@
 "use client";
 
-import { Fragment, useState } from "react";
-import {
-    MdSend
-} from "react-icons/md";
+import OverlayModal from "@/components/OverlayModal";
+import { ChangeEvent, Fragment, useState } from "react";
+import { MdSend } from "react-icons/md";
+import Lottie from "lottie-react";
+import successAnim from "@/assets/animations/email-marketing.json";
 
 const FormSubmit = () => {
   const [fullName, setFullName] = useState("");
@@ -39,7 +40,6 @@ const FormSubmit = () => {
     setLoading(false);
 
     if (res.ok) {
-      alert("Message sent successfully!");
       setFullName("");
       setEmail("");
       setMessage("");
@@ -49,8 +49,24 @@ const FormSubmit = () => {
     }
   };
 
+  const handlePDF = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+
+    if (file && file.size > 5 * 1024 * 1024) {
+      alert("PDF too large (max 10MB)");
+      return; 
+    }
+    setPdf(file);
+  };
+
   return (
     <Fragment>
+      <OverlayModal
+        isOpen={loading}
+        body={
+          <Lottie animationData={successAnim} loop={true} className="w-48" />
+        }
+      />
       {/* ✴---Mobile View---✴ */}
       <div className="mt-10 bg-[#1e1e1f] md:hidden">
         <h3 className="text-xl font-semibold text-white mb-4">Contact Form</h3>
@@ -88,13 +104,13 @@ const FormSubmit = () => {
               type="file"
               accept="application/pdf"
               className="hidden"
-              onChange={(e) => setPdf(e.target.files?.[0] || null)}
+              onChange={(e) => handlePDF(e)}
             />
           </label>
         </div>
 
         <div className="flex items-center justify-between w-full mt-1">
-          <span className="text-xs text-gray-500">Only PDF up to 1 MB</span>
+          <span className="text-xs text-gray-500">Only PDF up to 10 MB</span>
 
           {pdf && (
             <button
@@ -164,12 +180,12 @@ const FormSubmit = () => {
               type="file"
               accept="application/pdf"
               className="hidden"
-              onChange={(e) => setPdf(e.target.files?.[0] || null)}
+              onChange={(e) => handlePDF(e)}
             />
           </label>
         </div>
         <div className="flex items-center justify-between w-full mt-1">
-          <span className="text-xs text-gray-500">Only PDF up to 1 MB</span>
+          <span className="text-xs text-gray-500">Only PDF up to 10 MB</span>
 
           {pdf && (
             <button

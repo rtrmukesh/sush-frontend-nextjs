@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import mukesh from "@/assets/images/mukesh-mg.png";
 
-const ProfileImage = ({ show }: { show: boolean }) => {
+const ProfileImage = ({ show, setIsOpen }: { show: boolean, setIsOpen?: (value: boolean) => void }) => {
   return (
     <AnimatePresence>
       {show && (
@@ -27,6 +27,9 @@ const ProfileImage = ({ show }: { show: boolean }) => {
               className="object-cover w-full h-full"
               loading="lazy"
               priority={false}
+              onClick={()=>{
+                setIsOpen?.(true)
+              }}
             />
           </motion.div>
         </motion.div>
