@@ -13,8 +13,10 @@ import ProfileImage from "@/components/ProfileImage";
 
 export default function ProfileCard({
   isMobile = false,
+  setIsOpen,
 }: {
   isMobile?: boolean;
+  setIsOpen?: (value: boolean) => void;
 }) {
   const [showContacts, setShowContacts] = useState(false);
 
@@ -80,7 +82,7 @@ export default function ProfileCard({
         </button>
 
         {/* Profile Image */}
-        <ProfileImage show={true} />
+        <ProfileImage show={true} setIsOpen={setIsOpen} />
 
         {/* Name + Profession */}
         <div className="text-center">
