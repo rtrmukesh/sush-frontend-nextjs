@@ -10,7 +10,13 @@ import {
 } from "react-icons/fa";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import ProfileImage from "@/components/ProfileImage";
-
+import { Courgette } from "next/font/google";
+const courgette = Courgette({
+  weight: "400",        // Only "400" is available for Courgette
+  subsets: ["latin"],   // Subsets you need
+  display: "swap",      // Optional
+  variable: "--font-courgette", // Optional CSS variable
+});
 export default function ProfileCard({
   isMobile = false,
   setIsOpen,
@@ -87,8 +93,7 @@ export default function ProfileCard({
         {/* Name + Profession */}
         <div className="text-center">
           <h1
-            className="font-semibold text-lg sm:text-xl lg:text-2xl"
-            style={{ fontFamily: "Amaze Script" }}
+            className={`text-lg sm:text-xl lg:text-2xl ${courgette.className}`}
           >
             Mukesh M
           </h1>
