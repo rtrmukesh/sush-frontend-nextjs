@@ -18,7 +18,7 @@ export default function Home() {
   const [tabIndex, setTabIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Fragment>
+    <div style={{minWidth:"40vh"}}>
       <OverlayModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -80,6 +80,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-    </Fragment>
+    </div>
   );
 }

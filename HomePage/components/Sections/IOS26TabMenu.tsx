@@ -92,7 +92,11 @@ export default function IOS26TabMenu({
       </AnimatePresence>
 
       {/* FLOATING TAB BAR */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+      <div
+        className="fixed left-1/2 -translate-x-1/2 z-50
+             bottom-[calc(env(safe-area-inset-bottom)+0.10rem)]
+             md:bottom-6"
+      >
         <motion.div
           ref={barRef}
           onPointerMove={(e) => {
@@ -104,7 +108,11 @@ export default function IOS26TabMenu({
 
             handlePointerMove(e.touches[0].clientX);
           }}
-          className="relative flex items-center gap-2 px-3 py-2 rounded-3xl shadow-xl backdrop-blur-xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-black/60"
+          className=" relative flex items-center
+          gap-1 md:gap-2
+          px-2 md:px-3
+          py-1.5 md:py-2
+          rounded-3xl shadow-xl backdrop-blur-xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-black/60"
           style={{ touchAction: "none" }}
         >
           {tabs.map((tab, i) => {
@@ -116,27 +124,29 @@ export default function IOS26TabMenu({
                 key={tab.id}
                 onClick={() => setActiveIndex(i)}
                 whileTap={{ scale: 0.92 }}
-                className="relative w-14 h-12 flex flex-col items-center justify-center"
+                className="relative
+                w-14 h-12
+                md:w-14 md:h-12
+                flex flex-col items-center justify-center"
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
                     transition={{ type: "spring", stiffness: 500, damping: 32 }}
-                    className="absolute inset-0 rounded-2xl bg-black dark:bg-white"
+                    className="absolute inset-0 rounded-xl md:rounded-2xl bg-black dark:bg-white"
                   />
                 )}
 
                 <div className="relative z-10 flex flex-col items-center">
                   <Icon
-                    size={22}
                     className={
                       isActive
-                        ? "text-white dark:text-black"
-                        : "text-black/70 dark:text-white/70"
+                        ? "w-4 h-4 md:w-[22px] md:h-[22px] text-white dark:text-black"
+                        : "w-4 h-4 md:w-[22px] md:h-[22px] text-black/70 dark:text-white/70"
                     }
                   />
                   <span
-                    className={`text-[10px] mt-0.5 ${
+                    className={`text-[9px] md:text-[10px] mt-0.5 ${
                       isActive
                         ? "text-white dark:text-black"
                         : "text-black/50 dark:text-white/50"
