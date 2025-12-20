@@ -5,6 +5,7 @@ import { ChangeEvent, Fragment, useState } from "react";
 import { MdSend } from "react-icons/md";
 import Lottie from "lottie-react";
 import successAnim from "@/assets/animations/email-marketing.json";
+import onFinishAnim from "@/assets/animations/Send letter.json";
 
 const FormSubmit = () => {
   const [fullName, setFullName] = useState("");
@@ -12,6 +13,7 @@ const FormSubmit = () => {
   const [message, setMessage] = useState("");
   const [pdf, setPdf] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [onFinishLoading, setOnFinishLoading] = useState(false);
 
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,7 +38,7 @@ const FormSubmit = () => {
       method: "POST",
       body: formData,
     });
-
+    setOnFinishLoading(true);
     setLoading(false);
 
     if (res.ok) {
@@ -54,7 +56,7 @@ const FormSubmit = () => {
 
     if (file && file.size > 5 * 1024 * 1024) {
       alert("PDF too large (max 10MB)");
-      return; 
+      return;
     }
     setPdf(file);
   };
@@ -65,6 +67,19 @@ const FormSubmit = () => {
         isOpen={loading}
         body={
           <Lottie animationData={successAnim} loop={true} className="w-48" />
+        }
+      />
+      <OverlayModal
+        isOpen={onFinishLoading}
+        body={
+          <Lottie
+            animationData={onFinishAnim}
+            loop={false}
+            className="w-48"
+            onComplete={() => {
+              setOnFinishLoading(false);
+            }}
+          />
         }
       />
       {/* ✴---Mobile View---✴ */}
