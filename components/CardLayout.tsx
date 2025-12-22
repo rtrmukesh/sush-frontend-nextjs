@@ -3,22 +3,22 @@
 export const portfolioCards = [
   {
     id: 1,
-    title: "Nexreon",
+    title: "Torchlite",
     description:
       "Explore the breathtaking heights of natural wonders. These majestic mountains offer spectacular views.",
     image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+      "/torchlite.png",
     type: "main",
     className: "card rounded-2xl h-[300px] w-full top-0 left-0",
     status: "Running",
   },
   {
     id: 2,
-    title: "Torchlite",
+    title: "Nexreon",
     description:
       "Experience the serene beauty of this peaceful lake destination.",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+      "/nexreon.png",
     type: "left",
     className:
       "card rounded-2xl h-[197px] w-[430px] top-[305px] left-0 bottom-0",
@@ -29,7 +29,7 @@ export const portfolioCards = [
     title: "Motion Sports",
     description: "Discover the mysteries hidden within ancient forests.",
     image:
-      "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=80",
+      "/motionsports.png",
     type: "right",
     className:
       "card-d3 rounded-2xl border-4 border-white h-[310px] w-[450px] right-0 bottom-0",
@@ -50,6 +50,7 @@ export default function CardLayout() {
                 backgroundImage: `url(${data?.image})`,
               }}
             >
+              <div className="card-overlay"></div>
               <div className="card-content">
                 {/* Title */}
                 <div className="card-title flex items-center justify-between">
@@ -96,6 +97,12 @@ export default function CardLayout() {
             overflow: hidden;
             border-radius: 16px;
           }
+          .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+          }
 
           .card,
           .card-d3 {
@@ -131,6 +138,7 @@ export default function CardLayout() {
           }
 
           .card-content {
+            z-index: 2;
             position: absolute;
             bottom: 0;
             left: 0;
