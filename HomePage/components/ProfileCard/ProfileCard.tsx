@@ -1,17 +1,17 @@
 "use client";
+import NeonSign from "@/components/NeonSign";
+import ProfileImage from "@/components/ProfileImage";
+import { AnimatePresence, motion } from "framer-motion";
+import { Courgette } from "next/font/google";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaLinkedin,
-  FaInstagram,
+  FaChevronDown,
   FaFacebookF,
   FaGithub,
-  FaChevronDown,
+  FaInstagram,
+  FaLinkedin,
 } from "react-icons/fa";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import ProfileImage from "@/components/ProfileImage";
-import { Courgette } from "next/font/google";
-import NeonSign from "@/components/NeonSign";
 const courgette = Courgette({
   weight: "400",        // Only "400" is available for Courgette
   subsets: ["latin"],   // Subsets you need

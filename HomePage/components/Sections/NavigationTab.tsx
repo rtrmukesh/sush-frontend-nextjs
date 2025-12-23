@@ -1,4 +1,7 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+
 interface NavigationTabProps {
   setTabIndex: (index: number) => void;
   tabIndex: number;
@@ -7,7 +10,8 @@ const NavigationTab: React.FC<NavigationTabProps> = ({
   setTabIndex,
   tabIndex,
 }) => {
-  const menuItems = ["About", "Resume", "Skills", "Contact", "Gallery"];
+  const menuItems = ["About", "Resume", "Skills", "Contact", "Fun"];
+  const router = useRouter()
   return (
     <>
       {/* ✴---Desktop and web---✴ */}
@@ -34,7 +38,11 @@ const NavigationTab: React.FC<NavigationTabProps> = ({
                 tabIndex == index ? "text-white" : ""
               } cursor-pointer hover:text-white`}
               onClick={() => {
-                setTabIndex(index);
+                if(index == 4){
+                  router.push("/games")
+                }else{
+                  setTabIndex(index);
+                }
               }}
             >
               {item}
