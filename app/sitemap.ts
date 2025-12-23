@@ -1,12 +1,30 @@
 import type { MetadataRoute } from "next";
+import { games } from "@/data/games";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const baseUrl = "https://themukesh.com";
+
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: "https://themukesh.com/",
+      url: `${baseUrl}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${baseUrl}/games`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
   ];
+
+  const gameRoutes: MetadataRoute.Sitemap = games.map((game) => ({
+    url: `${baseUrl}/games/${game.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...gameRoutes];
 }

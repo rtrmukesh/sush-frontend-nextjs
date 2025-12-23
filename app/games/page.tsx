@@ -50,8 +50,17 @@ export const metadata = {
 export default function GamesPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-3xl font-bold mb-6">🎮 Games</h1>
+      <nav className="w-full  py-4 flex justify-between items-center   backdrop-blur">
+        <Link href="/" className="text-3xl font-bold">
+          🎮 GameZone
+        </Link>
 
+        <div className="flex gap-4 text-sm">
+          <Link href="/" className="hover:text-gray-300">
+            Home
+          </Link>
+        </div>
+      </nav>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {games.map((game) => (
           <Link

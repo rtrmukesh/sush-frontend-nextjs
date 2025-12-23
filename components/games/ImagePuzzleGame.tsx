@@ -120,20 +120,6 @@ export default function PuzzleGame() {
   /* ---------------- UI ---------------- */
   return (
     <>
-      <nav className="w-full px-6 py-4 flex justify-between items-center border-b border-white/10 bg-black/60 backdrop-blur">
-        <Link href="/" className="text-xl font-bold">
-          🎮 GameZone
-        </Link>
-
-        <div className="flex gap-4 text-sm">
-          <Link href="/" className="hover:text-gray-300">
-            Home
-          </Link>
-          <Link href="/games" className="hover:text-gray-300">
-            Games
-          </Link>
-        </div>
-      </nav>
       <style jsx>{`
         @keyframes fade-in {
           from {
