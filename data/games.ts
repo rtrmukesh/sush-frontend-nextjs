@@ -9,6 +9,7 @@ export const games = [
       title: "Image Puzzle Game | GameZone",
       description: "Play Image Puzzle Game online for free.",
       keywords: ["puzzle game", "image puzzle", "brain game"],
+      image: "/gamingbanner.png"
     },
   },
 
