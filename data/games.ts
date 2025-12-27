@@ -1,3 +1,5 @@
+import { SEO_KEYWORDS } from "./seo";
+
 export const games = [
   {
     id: 1,
@@ -8,9 +10,16 @@ export const games = [
     seo: {
       title: "Image Puzzle Game | GameZone",
       description: "Play Image Puzzle Game online for free.",
-      keywords: ["puzzle game", "image puzzle", "brain game"],
-      image: "/gamingbanner.png"
+      keywords: [
+        ...SEO_KEYWORDS,
+        "puzzle game",
+        "image puzzle",
+        "brain game",
+        "mukesh puzzle game",
+        "mukesh image puzzle",
+        "mukesh brain game",
+      ],
+      image: "/gamingbanner.png",
     },
   },
-
 ];
