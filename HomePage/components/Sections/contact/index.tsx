@@ -6,8 +6,10 @@ import Image from "next/image";
 import { MdCall, MdEmail } from "react-icons/md";
 import QRCode from "react-qr-code";
 import FormSubmit from "./components/FormSubmit";
-
-const ContactSection = () => {
+type propsTypes = {
+  setIsQrOpen?: (value: boolean) => void;
+};
+const ContactSection = ({ setIsQrOpen }: propsTypes) => {
   // VCARD DATA
   const vcardData = `BEGIN:VCARD
 VERSION:3.0
@@ -107,6 +109,9 @@ END:VCARD`;
                   duration: 0.45,
                   ease: [0.22, 1, 0.36, 1], // super smooth (apple spring-ish)
                 },
+              }}
+              onClick={() => {
+                setIsQrOpen?.(true);
               }}
             >
               {/* QR code → only desktop */}

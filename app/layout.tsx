@@ -15,6 +15,7 @@ import {
 import { person } from "@/lib/seo/person";
 import { profilePage } from "@/lib/seo/profilePage";
 import { faqs, images, localBusinesses, softwareApplications } from "@/lib/seo";
+import { SEO_KEYWORDS } from "@/data/seo";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,38 +29,30 @@ const GAID = process.env.GA_ID || "";
 const GTMID = process.env.GTM_ID || "";
 
 export const metadata: Metadata = {
-  title: "Mukesh Murugaiyan — Full Stack Developer",
+  title: {
+    default: "Mukesh Murugaiyan | Full Stack Developer",
+    template: "%s | Mukesh Murugaiyan",
+  },
   description:
-    "Portfolio of Mukesh Murugaiyan — Web, Android, iOS, and Desktop apps developer.",
-  keywords: [
-    "Full Stack Developer",
-    "Web Developer",
-    "Android Developer",
-    "iOS Developer",
-    "Desktop Apps",
-    "Portfolio",
-    "sush tech",
-    "themukesh.com",
-    "themukesh",
-    "mukeshm",
-    "SushTech",
-    "Sush Tech",
-    "sush tech",
-    "sush tech portal",
-  ],
+    "Portfolio of Mukesh Murugaiyan | Web, Android, iOS, and Desktop apps developer.",
+  keywords: SEO_KEYWORDS,
+  metadataBase: new URL("https://themukesh.com"),
   appleWebApp: {
     title: "Mukesh Murugaiyan",
     capable: true,
     statusBarStyle: "black-translucent",
   },
+  alternates: {
+    canonical: "https://themukesh.com",
+  },
   openGraph: {
-    title: "Mukesh Murugaiyan — Full Stack Developer Portfolio",
+    title: "Mukesh Murugaiyan | Full Stack Developer Portfolio",
     description: "Web, Android, iOS, and Desktop apps developer portfolio.",
     url: "https://themukesh.com",
     siteName: "Mukesh Murugaiyan",
     images: [
       {
-        url: "https://themukesh.com/mukesh-mg.png",
+        url: "/mukesh-mg.png",
         width: 1200,
         height: 630,
       },
@@ -69,15 +62,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mukesh Murugaiyan — Full Stack Developer",
+    title: "Mukesh Murugaiyan | Full Stack Developer",
     description:
-      "Official portfolio of Mukesh Murugaiyan — I build Web, Android, iOS & Desktop applications with modern tech stacks.",
+      "Official portfolio of Mukesh Murugaiyan | I build Web, Android, iOS & Desktop applications with modern tech stacks.",
     site: "@themukesh",
     creator: "@themukesh",
     images: [
       {
         url: "https://themukesh.com/mukesh-mg.png",
-        alt: "Mukesh Murugaiyan — Full Stack Developer Portfolio",
+        alt: "Mukesh Murugaiyan | Full Stack Developer Portfolio",
       },
     ],
   },
