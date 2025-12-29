@@ -133,10 +133,10 @@ export default function SkillSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <section className="bg-[#1e1e1f] p-6 rounded-[1.25rem] border border-gray-800">
-      <h2 className="text-3xl font-bold text-white mb-2">Skills & Expertise</h2>
+      <h2 className="text-3xl font-bold text-white mb-2">Expertise</h2>
       <div className="w-24 h-[3px] bg-cyan-400 rounded-full mb-10" />
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols gap-6">
         {skills.map((skill, i) => (
           <SkillCard
             key={i}

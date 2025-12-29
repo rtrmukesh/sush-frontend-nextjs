@@ -10,17 +10,23 @@ const NavigationTab: React.FC<NavigationTabProps> = ({
   setTabIndex,
   tabIndex,
 }) => {
-  const menuItems = ["About", "Resume", "Skills", "Contact", "Fun"];
-  const router = useRouter()
+  const menuItems = ["About", "Resume", "Expertise", "Contact", "Fun"];
+  const router = useRouter();
   return (
     <>
       {/* ✴---Desktop and web---✴ */}
       <button
         className="
         absolute top-0 right-0
-        flex items-center gap-3     
-        px-4 h-8 sm:px-6 sm:h-9
-        text-xs font-medium
+        flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8     
+      px-4 h-8 
+      sm:px-6 sm:h-10 
+      md:px-8 md:h-12 
+      lg:px-10 lg:h-14
+        text-xs 
+        sm:text-sm 
+        md:text-base 
+        lg:text-lg font-medium
         rounded-tr-[1.25rem] rounded-bl-[1.25rem]
         bg-gradient-to-r from-[hsl(190,82%,20%)] to-black
         border border-[hsl(190,82%,72%)]
@@ -38,9 +44,9 @@ const NavigationTab: React.FC<NavigationTabProps> = ({
                 tabIndex == index ? "text-white" : ""
               } cursor-pointer hover:text-white`}
               onClick={() => {
-                if(index == 4){
-                  router.push("/games")
-                }else{
+                if (index == 4) {
+                  router.push("/games");
+                } else {
                   setTabIndex(index);
                 }
               }}

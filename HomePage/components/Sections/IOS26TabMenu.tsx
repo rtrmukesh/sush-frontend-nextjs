@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 const tabs = [
   { id: "About", icon: Info, label: "About" },
   { id: "Resume", icon: Briefcase, label: "Resume" },
-  { id: "Skills", icon: Cpu, label: "Skills" },
+  { id: "Expertise", icon: Cpu, label: "Expertise" },
   { id: "Contact", icon: Send, label: "Contact" },
   { id: "Fun", icon: Gamepad2, label: "Fun", link: "/games" },
 ];
