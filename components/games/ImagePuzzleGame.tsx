@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function PuzzleGame() {
   const [gridSize, setGridSize] = useState(3);
@@ -10,7 +9,7 @@ export default function PuzzleGame() {
   const [emptyIndex, setEmptyIndex] = useState(0);
   const [moves, setMoves] = useState(0);
   const [time, setTime] = useState(0);
-  const [tileSize, setTileSize] = useState(120);
+  const [tileSize, setTileSize] = useState(100);
   const [showWin, setShowWin] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -34,7 +33,7 @@ export default function PuzzleGame() {
   useEffect(() => {
     if (image) startGame();
     return () => stopTimer();
-  }, [image, gridSize]);
+  }, [image]);
 
   const startGame = () => {
     const arr = Array.from({ length: totalTiles }, (_, i) => i);
@@ -162,41 +161,29 @@ export default function PuzzleGame() {
           </div>
         </div>
       )}
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex items-center justify-center p-4">
+      <div className="bg-gradient-to-br from-black via-gray-900 to-black text-white flex items-center justify-center p-4">
         {/* Glass Card */}
-        <div className="w-full max-w-3xl rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-6 flex flex-col items-center gap-6 animate-fade-in">
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-wide">
-            🧩 Image Puzzle Game
-          </h1>
+        <div className="w-full max-w-xl rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-6 flex flex-col items-center gap-6 animate-fade-in">
           <p className="text-sm opacity-70 text-center max-w-md">
             Upload your image, choose difficulty and solve the puzzle as fast as
             you can.
           </p>
 
           {/* Controls */}
-          <div className="flex flex-wrap gap-3 items-center justify-center">
-            <select
-              value={gridSize}
-              onChange={(e) => setGridSize(Number(e.target.value))}
-              className="px-4 py-2 rounded-full bg-black/60 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/40"
-            >
-              <option value={3}>Easy • 3x3</option>
-              <option value={4}>Medium • 4x4</option>
-              <option value={5}>Hard • 5x5</option>
-            </select>
-
-            {/* Upload Button */}
-            <label className="cursor-pointer px-4 py-2 rounded-full bg-white text-black font-medium hover:bg-gray-200 transition">
-              Upload Image
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-              />
-            </label>
-          </div>
+          {!image && (
+            <div className="flex flex-wrap gap-3 items-center justify-center">
+              {/* Upload Button */}
+              <label className="cursor-pointer px-4 py-2 rounded-full bg-white text-black font-medium hover:bg-gray-200 transition">
+                Upload Image
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </label>
+            </div>
+          )}
 
           {/* Stats */}
           {image && (
