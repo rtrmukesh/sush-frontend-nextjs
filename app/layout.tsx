@@ -77,13 +77,13 @@ export const metadata: Metadata = {
   verification: {
     google: "AUY8DrfbJpplzyCMcTJNiCHYZJ34AB2NphOmTJ1_gfY",
   },
- icons: {
-  icon: [
-    { url: "/icon0.svg", type: "image/svg+xml" },
-    { url: "/icon1.png", type: "image/png" },
-  ],
-  apple: "/apple-icon.png",
-},
+  icons: {
+    icon: [
+      { url: "/icon0.svg", type: "image/svg+xml" },
+      { url: "/icon1.png", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -93,6 +93,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* AdSense global script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7493262026277368"
+          crossOrigin="anonymous"
+        />
+        {/* AdSense verification meta tag */}
+        <meta name="google-adsense-account" content="ca-pub-7493262026277368" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
