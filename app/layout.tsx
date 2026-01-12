@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import PagePreloader from "@/components/PagePreloader";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import {
+  BreadcrumbJsonLd,
   FAQJsonLd,
   ImageJsonLd,
   LocalBusinessJsonLd,
@@ -16,6 +17,7 @@ import { person } from "@/lib/seo/person";
 import { profilePage } from "@/lib/seo/profilePage";
 import { faqs, images, localBusinesses, softwareApplications } from "@/lib/seo";
 import { SEO_KEYWORDS } from "@/data/seo";
+import Providers from "./providers";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -127,9 +129,19 @@ export default function RootLayout({
         {/* FAQ */}
         <FAQJsonLd questions={faqs} />
 
+        <BreadcrumbJsonLd
+          items={[
+            {
+              name: "Home",
+              item: "https://themukesh.com",
+            },
+          ]}
+        />
         <GoogleTagManager gtmId={GTMID} />
         <PagePreloader>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <Providers>{children}</Providers>
+          </ThemeProvider>
         </PagePreloader>
         <Toaster richColors closeButton position="top-right" />
         <GoogleAnalytics gaId={GAID} />
