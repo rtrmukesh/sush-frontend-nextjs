@@ -49,6 +49,7 @@ export async function GET(req: Request) {
     );
 
     return NextResponse.json({ success: true, data: mediaList.data || [] });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.error("Error fetching Instagram media:", err);
     return NextResponse.json(

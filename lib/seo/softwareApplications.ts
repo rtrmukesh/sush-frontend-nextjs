@@ -131,4 +131,17 @@ export const softwareApplications: SoftwareApplicationJsonLdProps[] = [
     dateModified: "2025-12-06",
     contentRating: "General",
   },
+  {
+    type: "WebApplication",
+    name: "CSS Grid Generator",
+    applicationCategory: "DeveloperTool",
+    operatingSystem: "All",
+    description:
+      "Visual CSS Grid layout generator tool built by Mukesh Murugaiyan for frontend developers.",
+    url: "https://themukesh.com/tools/css-grid-generator",
+    author: {
+      "@type": "Person",
+      name: "Mukesh Murugaiyan",
+    },
+  },
 ];

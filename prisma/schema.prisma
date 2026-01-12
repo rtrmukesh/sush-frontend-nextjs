@@ -49,3 +49,21 @@ model AutoReply {
   alwaysReply   Boolean      @default(false)
   integration   Integration? @relation(fields: [integrationId], references: [id])
 }
+
+model Media {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  size        String?
+  category    String?
+  file_path   String
+  owner_id    String?
+  object_name  String?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@map("media")
+}
+
