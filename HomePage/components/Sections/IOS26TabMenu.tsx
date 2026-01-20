@@ -1,8 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Briefcase, Cpu, Gamepad2, Info, Send } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Briefcase, Cpu, Info, Send, ToolCase } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const tabs = [
@@ -10,7 +9,7 @@ const tabs = [
   { id: "Resume", icon: Briefcase, label: "Resume" },
   { id: "Expertise", icon: Cpu, label: "Expertise" },
   { id: "Contact", icon: Send, label: "Contact" },
-  { id: "Fun", icon: Gamepad2, label: "Fun", link: "/games" },
+  { id: "Tools", icon: ToolCase, label: "Tools", link: "/games" },
 ];
 
 export default function IOS26TabMenu({
@@ -24,7 +23,6 @@ export default function IOS26TabMenu({
 }) {
   const barRef = useRef<HTMLDivElement | null>(null);
   const [direction, setDirection] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     navigator.vibrate?.(4);
@@ -111,11 +109,7 @@ export default function IOS26TabMenu({
               <motion.button
                 key={tab.id}
                 onClick={() => {
-                  if (tab.link) {
-                    router.push(tab.link);
-                  } else {
                     setActiveIndex(i);
-                  }
                 }}
                 whileTap={{ scale: 0.92 }}
                 className="relative

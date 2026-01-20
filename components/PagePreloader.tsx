@@ -1,14 +1,23 @@
 "use client";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, ReactNode } from "react";
 
 export default function PagePreloader({ children }: { children?: ReactNode }) {
+
+    const pathname = usePathname();
+  const isHome = pathname === "/";
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+     if (!isHome) return;
     const timer = setTimeout(() => setLoading(false), 2200);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isHome]);
+
+   if (!isHome) {
+    return <>{children}</>;
+  }
 
   return (
     <>
