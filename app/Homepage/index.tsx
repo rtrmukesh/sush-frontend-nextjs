@@ -16,8 +16,11 @@ import IOS26TabMenu from "@/HomePage/components/Sections/IOS26TabMenu";
 import SkillSection from "@/HomePage/components/Sections/skills";
 import { useState } from "react";
 import QRCode from "react-qr-code";
+import ToolSection from "@/HomePage/components/Sections/Tool";
 
-const HomePageClient=()=> {
+
+
+const HomePageClient = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isQrOpen, setIsQrOpen] = useState(false);
@@ -111,6 +114,7 @@ END:VCARD`;
               {tabIndex == 1 && <ResumeSection />}
               {tabIndex == 3 && <ContactSection setIsQrOpen={setIsQrOpen} />}
               {tabIndex == 2 && <SkillSection />}
+              {tabIndex == 4 && <ToolSection />}
             </div>
           </div>
 
@@ -127,6 +131,7 @@ END:VCARD`;
                 <ResumeSection />
                 <SkillSection />
                 <ContactSection />
+                <ToolSection />
               </IOS26TabMenu>
             </div>
           </div>
@@ -134,6 +139,6 @@ END:VCARD`;
       </main>
     </div>
   );
-}
+};
 
 export default HomePageClient;
