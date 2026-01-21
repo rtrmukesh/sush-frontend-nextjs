@@ -89,7 +89,7 @@ END:VCARD`;
           </>
         }
       />
-      <main className="bg-[#0b0b0d] text-white">
+      <main className="text-white">
         <div className="w-full max-w-7xl mx-auto px-4 lg:px-10 pt-12">
           {/* Desktop | Two Column */}
           <div className="hidden lg:flex gap-[2.3%]">

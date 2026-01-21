@@ -24,7 +24,7 @@ const ToolSection = () => {
   ];
 
   return (
-    <section className="bg-[#111111] p-6 border border-gray-800 rounded-[1.25rem] h-[-webkit-fill-available]">
+    <section className="bg-[#111111] p-6 border border-gray-800 rounded-[1.25rem]">
       {/* Header */}
       <div className="flex items-center gap-3 mb-2">
         <div className="p-1.5 rounded-md bg-[#202020] border border-gray-700">

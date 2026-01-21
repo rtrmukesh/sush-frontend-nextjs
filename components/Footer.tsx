@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="mx-4 my-8 pb-28 lg:pb-0">
       {/* Main Container */}
-      <div className="bg-[#111111] text-white p-6 md:p-12 rounded-3xl border border-white/10 max-w-7xl mx-auto">
+      <div className="bg-[#111111] text-white p-6 md:p-12 rounded-3xl border border-white/10 max-w-[1200px] mx-auto">
         
         {/* Responsive Grid System */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-4">
