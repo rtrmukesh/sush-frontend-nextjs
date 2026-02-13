@@ -33,6 +33,8 @@ const PopupHeader = ({ activeSection: _externalActiveSection, visible }: PopupHe
     window.scrollTo({ top: scrollTo, behavior: "smooth" });
   };
 
+  const [isUserActive, setIsUserActive] = useState(true);
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -58,9 +60,31 @@ const PopupHeader = ({ activeSection: _externalActiveSection, visible }: PopupHe
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    const resetTimer = () => {
+      setIsUserActive(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setIsUserActive(false);
+      }, 5000); 
+    };
+
+    const events = ["scroll", "mousemove", "keydown", "click", "touchstart"];
+    
+    events.forEach((event) => window.addEventListener(event, resetTimer));
+    resetTimer(); 
+
+    return () => {
+      events.forEach((event) => window.removeEventListener(event, resetTimer));
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && isUserActive && (
         <motion.div
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -79,7 +103,7 @@ const PopupHeader = ({ activeSection: _externalActiveSection, visible }: PopupHe
             transition-all duration-300
           "
           >
-            {Menus.map((item) => {
+           {Menus.map((item) => {
               const isActive = activeSection === item.id;
               const isHovered = hoveredTab === item.id;
 
