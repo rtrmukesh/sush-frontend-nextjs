@@ -19,6 +19,7 @@ import {
   SoftwareApplicationJsonLd,
 } from "next-seo";
 import Providers from "./providers";
+import PagePreloader from "@/components/PagePreloader";
 // import UsefulLinksModal from "@/components/UsefulLinksModal";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -143,12 +144,12 @@ export default function RootLayout({
           ]}
         />
         <GoogleTagManager gtmId={GTMID} />
-        {/* <PagePreloader> */}
+        <PagePreloader>
           <ThemeProvider>
             {/* <PopupHeader/> */}
             <Providers>{children}</Providers>
           </ThemeProvider>
-        {/* </PagePreloader> */}
+        </PagePreloader>
         {/* <UsefulLinksModal /> */}
         <Footer/>
         <Toaster richColors closeButton position="top-right" />
